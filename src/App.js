@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+// from react-router-dom (uses routes below)
+import { Routes, Route, NavLink } from 'react-router-dom';
+import PokemonDiscoveryPage from './components/PokemonDiscoveryPage';
+// importing pokemon detail page
+import PokemonDetailPage from "./components/PokemonDetailPage";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Pokemon Discovery!</h1>
+      <div className="AppNav">
+        <NavLink className="NavElement" end to="/">
+          Home
+        </NavLink>
+      </div>
+      <Routes>
+        <Route path="/" element={<PokemonDiscoveryPage />}>
+          {/* filtering pokemon based on letters typed */}
+          <Route path=":filter" element={<PokemonDiscoveryPage />}/>
+        </Route>
+        {/* calling details page */}
+        <Route path="/details/:pokemon_name" element={<PokemonDetailPage />} />
+      </Routes>
     </div>
   );
 }
